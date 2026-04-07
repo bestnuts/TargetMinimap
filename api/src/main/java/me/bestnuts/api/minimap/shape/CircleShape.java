@@ -1,11 +1,9 @@
 package me.bestnuts.api.minimap.shape;
 
-import org.bukkit.Location;
-
 public class CircleShape implements MinimapShape {
 
     @Override
-    public boolean isRadiusIn(Location center, Location target, int radius) {
-        return !(center.distance(target) > radius);
+    public boolean isInBounds(double rx, double ry, int radius) {
+        return rx * rx + ry * ry <= (double) radius * radius;
     }
 }

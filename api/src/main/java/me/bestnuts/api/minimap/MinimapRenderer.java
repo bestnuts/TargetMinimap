@@ -7,7 +7,12 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 
+import java.util.Iterator;
+
 public class MinimapRenderer {
+
+    private record CalculateBox(double cosYaw, double sinYaw) {
+    }
 
     private final Minimap minimap;
 
@@ -17,24 +22,41 @@ public class MinimapRenderer {
 
     public Component render(GlobalConfiguration.Renderer renderer, GlobalConfiguration.Output output, Location center) {
         Component component = Component.empty().font(Key.key(output.key(), output.path()));
-        for (MinimapTarget target : minimap.getTargets()) {
-            component = component.append(render(renderer, center, target)).append(
+        double yaw = Math.toRadians(center.getYaw());
+        double cosYaw = Math.cos(yaw);
+        double sinYaw = Math.sin(yaw);
+        CalculateBox box = new CalculateBox(cosYaw, sinYaw);
+        Iterator<MinimapTarget> iterator = minimap.getTargets().iterator();
+        while (iterator.hasNext()) {
+            MinimapTarget target = iterator.next();
+            if (!target.getTarget().isValid()) {
+                iterator.remove();
+                continue;
+            }
+            component = component.append(render(renderer, center, target, box)).append(
                 output.separator()
             );
         }
         return component;
     }
 
-    public Component render(GlobalConfiguration.Renderer renderer, Location center, MinimapTarget target) {
+    public Component render(GlobalConfiguration.Renderer renderer, Location center, MinimapTarget target, CalculateBox box) {
         MinimapShape shape = renderer.shape().getShape();
         int radius = renderer.radius();
         Location targetLocation = target.getLocation();
-        if (!shape.isRadiusIn(center, targetLocation, radius)) {
+
+        int dx = targetLocation.getBlockX() - center.getBlockX();
+        int dy = targetLocation.getBlockZ() - center.getBlockZ();
+
+        double rx = dx * box.cosYaw + dy * box.sinYaw;
+        double ry = dy * box.cosYaw - dx * box.sinYaw;
+
+        if (!shape.isInBounds(rx, ry, radius)) {
             return Component.empty();
         }
 
-        int x = ((targetLocation.getBlockX() - center.getBlockX()) * 255) / radius;
-        int y = ((targetLocation.getBlockZ() - center.getBlockZ()) * 255) / radius;
+        int x = (int) ((128 * rx) / radius) + 128;
+        int y = (int) ((128 * ry) / radius) + 128;
 
         return MinimapTextBuilder
                 .create()
