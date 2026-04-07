@@ -33,7 +33,9 @@ public class MinimapRenderer {
                 iterator.remove();
                 continue;
             }
-            component = component.append(render(renderer, center, target, box)).append(
+            Component check = render(renderer, center, target, box);
+            if (check.equals(Component.empty())) continue;
+            component = component.append(check).append(
                 output.separator()
             );
         }
