@@ -7,9 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class GlobalScheduler {
 
@@ -39,6 +37,10 @@ public class GlobalScheduler {
             );
             player.getPlayer().sendActionBar(component);
         }
+    }
+
+    public Collection<TMPlayer> getTMPlayers() {
+        return players.values();
     }
 
     public void storePlayer(Player player) {
