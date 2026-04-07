@@ -7,3 +7,6 @@ pluginManagement {
 }
 
 rootProject.name = "TargetMinimap"
+
+include("api")
+include("test-plugin")

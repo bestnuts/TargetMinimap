@@ -22,6 +22,9 @@ public class GlobalConfiguration extends YamlConfiguration {
     }
 
     private void load() {
+        if (!file.exists()) {
+            saveConfig();
+        }
         try {
             super.load(file);
         } catch (Exception e) {

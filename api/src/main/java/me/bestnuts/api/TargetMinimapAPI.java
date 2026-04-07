@@ -27,9 +27,11 @@ public class TargetMinimapAPI {
         return new MinimapTarget(target, () -> icon);
     }
 
-    public static void addTarget(MinimapTarget target, Player player) {
+    public static void addTarget(Player player, MinimapTarget... targets) {
         GlobalScheduler scheduler = TargetMinimap.getInstance().getScheduler();
         TMPlayer tmPlayer = scheduler.getTMPlayer(player.getUniqueId());
-        tmPlayer.getMinimap().getTargets().add(target);
+        for (MinimapTarget target : targets) {
+            tmPlayer.getMinimap().getTargets().add(target);
+        }
     }
 }
