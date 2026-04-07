@@ -19,6 +19,7 @@ public class TargetMinimap extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        this.scheduler.disable();
         this.scheduler = null;
         this.configuration = null;
         instance = null;
