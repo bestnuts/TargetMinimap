@@ -35,7 +35,7 @@ public class GlobalScheduler {
                 continue;
             }
             Component component = player.getMinimap().getRenderer().render(
-                    configuration.getRenderer(), player.getLocation()
+                    configuration.getRenderer(), configuration.getOutput(), player.getLocation()
             );
             player.getPlayer().sendActionBar(component);
         }
