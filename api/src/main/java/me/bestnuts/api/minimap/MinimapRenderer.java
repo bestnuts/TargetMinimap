@@ -50,7 +50,7 @@ public class MinimapRenderer {
         int dx = targetLocation.getBlockX() - center.getBlockX();
         int dy = targetLocation.getBlockZ() - center.getBlockZ();
 
-        double rx = dx * box.cosYaw + dy * box.sinYaw;
+        double rx = -(dx * box.cosYaw + dy * box.sinYaw);
         double ry = dy * box.cosYaw - dx * box.sinYaw;
 
         if (!shape.isInBounds(rx, ry, radius)) {
