@@ -33,7 +33,7 @@ void main() {
     if (ltColor == ivec4(1, 2, 3, 4)) {
         float x = Color.r;
         float y = Color.g;
-        float scale = Color.b * 255.0;
+        float scale = Color.b * 255.0 * 2.0;
 
         vec3 ndcPos = gl_Position.xyz / gl_Position.w;
 

@@ -10,7 +10,7 @@ public class MinimapTextBuilder {
     private Component icon = Component.empty();
     private int x = 0;
     private int y = 0;
-    private int scale = 255;
+    private int scale = 232; // 셰이더 매직 넘버 232 * 2 == 464
 
     private MinimapTextBuilder() {
     }
