@@ -44,7 +44,8 @@ public class GlobalConfiguration extends YamlConfiguration {
         String shape = this.getString("render.shape", "Circle");
         this.renderer = new Renderer(
                 this.getInt("render.radius", 128),
-                Shape.valueOf(shape)
+                Shape.valueOf(shape),
+                this.getBoolean("render.out-align", false)
         );
     }
 
@@ -65,7 +66,7 @@ public class GlobalConfiguration extends YamlConfiguration {
         return output;
     }
 
-    public record Renderer(int radius, Shape shape) {
+    public record Renderer(int radius, Shape shape, boolean outAlign) {
     }
 
     public record Output(String key, String path, Component separator) {

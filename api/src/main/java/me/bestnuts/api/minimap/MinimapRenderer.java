@@ -11,7 +11,7 @@ import java.util.Iterator;
 
 public class MinimapRenderer {
 
-    private record CalculateBox(double cosYaw, double sinYaw) {
+    public record CalculateBox(double cosYaw, double sinYaw) {
     }
 
     private final Minimap minimap;
@@ -53,16 +53,21 @@ public class MinimapRenderer {
         double rx = -(dx * box.cosYaw + dy * box.sinYaw);
         double ry = dy * box.cosYaw - dx * box.sinYaw;
 
+        MinimapTextBuilder builder = MinimapTextBuilder
+                .create()
+                .icon(target.getIcon());
+
         if (!shape.isInBounds(rx, ry, radius)) {
+            if (renderer.outAlign()) {
+                return shape.outOfBoundAlign(rx, ry, radius, box, builder);
+            }
             return Component.empty();
         }
 
         int x = (int) ((128 * rx) / radius) + 128;
         int y = (int) ((128 * ry) / radius) + 128;
 
-        return MinimapTextBuilder
-                .create()
-                .icon(target.getIcon())
+        return builder
                 .x(x)
                 .y(y)
                 .build();
