@@ -12,8 +12,9 @@ public class SquareShape implements MinimapShape {
 
     @Override
     public Component outOfBoundAlign(double rx, double ry, int radius, MinimapTextBuilder builder) {
-        int x = Math.clamp(radius, -radius, (int) rx);
-        int y = Math.clamp(radius, -radius, (int) ry);
+        double scale = radius / Math.max(Math.abs(rx), Math.abs(ry));
+        int x = Math.clamp((int) (128 * rx * scale / radius) + 128, 0, 255);
+        int y = Math.clamp((int) (128 * ry * scale / radius) + 128, 0, 255);
         return builder.x(x).y(y).build();
     }
 }

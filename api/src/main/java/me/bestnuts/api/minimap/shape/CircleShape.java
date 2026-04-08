@@ -13,8 +13,8 @@ public class CircleShape implements MinimapShape {
     @Override
     public Component outOfBoundAlign(double rx, double ry, int radius, MinimapTextBuilder builder) {
         double dist = Math.sqrt(rx * rx + ry * ry);
-        int x = (int) (128 * rx / dist) + 128;
-        int y = (int) (128 * ry / dist) + 128;
+        int x = Math.clamp((int) (128 * rx / dist) + 128, 0, 255);
+        int y = Math.clamp((int) (128 * ry / dist) + 128, 0, 255);
         return builder.x(x).y(y).build();
     }
 }
