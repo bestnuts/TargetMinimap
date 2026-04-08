@@ -59,7 +59,7 @@ public class MinimapRenderer {
 
         if (!shape.isInBounds(rx, ry, radius)) {
             if (renderer.outAlign()) {
-                return shape.outOfBoundAlign(rx, ry, radius, box, builder);
+                return shape.outOfBoundAlign(rx, ry, radius, builder);
             }
             return Component.empty();
         }
