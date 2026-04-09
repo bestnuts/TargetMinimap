@@ -1,7 +1,6 @@
 package me.bestnuts.api.minimap.shape;
 
 import me.bestnuts.api.minimap.text.MinimapTextBuilder;
-import net.kyori.adventure.text.Component;
 
 public class CircleShape implements MinimapShape {
 
@@ -11,10 +10,10 @@ public class CircleShape implements MinimapShape {
     }
 
     @Override
-    public Component outOfBoundAlign(double rx, double ry, int radius, MinimapTextBuilder builder) {
+    public MinimapTextBuilder outOfBoundAlign(double rx, double ry, int radius, MinimapTextBuilder builder) {
         double dist = Math.sqrt(rx * rx + ry * ry);
         int x = Math.clamp((int) (128 * rx / dist) + 128, 0, 255);
         int y = Math.clamp((int) (128 * ry / dist) + 128, 0, 255);
-        return builder.x(x).y(y).build();
+        return builder.x(x).y(y);
     }
 }

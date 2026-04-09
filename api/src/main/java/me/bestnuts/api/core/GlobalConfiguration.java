@@ -2,7 +2,6 @@ package me.bestnuts.api.core;
 
 import me.bestnuts.api.TargetMinimap;
 import me.bestnuts.api.minimap.shape.Shape;
-import net.kyori.adventure.text.Component;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -50,11 +49,9 @@ public class GlobalConfiguration extends YamlConfiguration {
     }
 
     private void output() {
-        Component separator = Component.text(this.getString("output.separator", "\uF800"));
         this.output = new Output(
                 this.getString("output.key", "minecraft"),
-                this.getString("output.path", "radar"),
-                separator
+                this.getString("output.path", "radar")
         );
     }
 
@@ -69,6 +66,6 @@ public class GlobalConfiguration extends YamlConfiguration {
     public record Renderer(int radius, Shape shape, boolean outAlign) {
     }
 
-    public record Output(String key, String path, Component separator) {
+    public record Output(String key, String path) {
     }
 }

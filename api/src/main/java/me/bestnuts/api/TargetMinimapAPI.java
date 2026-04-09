@@ -7,6 +7,7 @@ import me.bestnuts.api.minimap.target.EntityTarget;
 import me.bestnuts.api.minimap.target.Target;
 import me.bestnuts.api.player.TMPlayer;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -20,6 +21,20 @@ public class TargetMinimapAPI {
 
     public static MinimapTarget createTarget(Component icon, Entity entity) {
         Target target = new EntityTarget(entity);
+        return createMinimapTarget(target, icon);
+    }
+
+    public static MinimapTarget createTarget(Component icon, Location location) {
+        Target target = new Target() {
+            @Override
+            public Location getLocation() {
+                return location;
+            }
+            @Override
+            public boolean isValid() {
+                return true;
+            }
+        };
         return createMinimapTarget(target, icon);
     }
 

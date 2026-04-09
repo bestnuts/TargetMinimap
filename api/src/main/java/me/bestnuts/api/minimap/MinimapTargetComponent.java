@@ -1,12 +1,11 @@
 package me.bestnuts.api.minimap;
 
+import me.bestnuts.api.minimap.text.MinimapSeparatorBuilder;
 import me.bestnuts.api.minimap.text.MinimapTextBuilder;
 
 public class MinimapTargetComponent {
 
-    // TODO : separate nsf 2의 거듭제곱별 구성
-    private int imageWidth = 256;
-    // TODO : nsf 2진 구성
+    private int imageWidth = 128;
     private int xOffset = 0;
     private int scaleModifier = 232;
 
@@ -30,6 +29,10 @@ public class MinimapTargetComponent {
     public MinimapTargetComponent scale(int scale) {
         this.scaleModifier = scale;
         return this;
+    }
+
+    public MinimapSeparatorBuilder separator() {
+        return MinimapSeparatorBuilder.of(imageWidth, xOffset);
     }
 
     public MinimapTextBuilder builder(MinimapTarget target) {

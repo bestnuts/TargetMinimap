@@ -2,6 +2,7 @@ package me.bestnuts.api.minimap;
 
 import me.bestnuts.api.core.GlobalConfiguration;
 import me.bestnuts.api.minimap.shape.MinimapShape;
+import me.bestnuts.api.minimap.text.MinimapSeparatorBuilder;
 import me.bestnuts.api.minimap.text.MinimapTextBuilder;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
@@ -33,16 +34,15 @@ public class MinimapRenderer {
                 iterator.remove();
                 continue;
             }
-            Component check = render(renderer, center, target, box);
-            if (check.equals(Component.empty())) continue;
-            component = component.append(check).append(
-                output.separator()
-            );
+            MinimapTextBuilder builder = render(renderer, center, target, box);
+            if (builder == null) continue;
+            MinimapSeparatorBuilder separator = target.getComponent().separator();
+            component = component.append(builder.build(separator));
         }
         return component;
     }
 
-    public Component render(GlobalConfiguration.Renderer renderer, Location center, MinimapTarget target, CalculateBox box) {
+    public MinimapTextBuilder render(GlobalConfiguration.Renderer renderer, Location center, MinimapTarget target, CalculateBox box) {
         MinimapShape shape = renderer.shape().getShape();
         int radius = renderer.radius();
         Location targetLocation = target.getLocation();
@@ -59,7 +59,7 @@ public class MinimapRenderer {
             if (renderer.outAlign()) {
                 return shape.outOfBoundAlign(rx, ry, radius, builder);
             }
-            return Component.empty();
+            return null;
         }
 
         int x = (int) ((128 * rx) / radius) + 128;
@@ -67,7 +67,6 @@ public class MinimapRenderer {
 
         return builder
                 .x(x)
-                .y(y)
-                .build();
+                .y(y);
     }
 }

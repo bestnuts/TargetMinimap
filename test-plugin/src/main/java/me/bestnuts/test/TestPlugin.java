@@ -4,6 +4,7 @@ import me.bestnuts.api.TargetMinimap;
 import me.bestnuts.api.TargetMinimapAPI;
 import me.bestnuts.api.minimap.MinimapTarget;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,16 +31,44 @@ public class TestPlugin extends JavaPlugin implements Listener {
         Player player = event.getPlayer();
 
         MinimapTarget centerTarget = TargetMinimapAPI.createTarget(
-                Component.text("\uE000\uF800\uE001"),
+                Component.text("\uE000"),
                 player
         );
 
-        MinimapTarget spawnTarget = TargetMinimapAPI.createTarget(
-                Component.text("\uE001"),
-                player.getWorld().getSpawnLocation().getBlock()
+        Location anchor = player.getLocation().clone();
+
+        MinimapTarget index_0 = TargetMinimapAPI.createTarget(
+                Component.text("\uE00A"),
+                anchor
+        );
+        MinimapTarget index_1 = TargetMinimapAPI.createTarget(
+                Component.text("\uE00B"),
+                anchor
+        );
+        MinimapTarget index_2 = TargetMinimapAPI.createTarget(
+                Component.text("\uE00C"),
+                anchor
+        );
+        MinimapTarget index_3 = TargetMinimapAPI.createTarget(
+                Component.text("\uE00D"),
+                anchor
         );
 
-        TargetMinimapAPI.addTarget(player, centerTarget, spawnTarget);
+        backgroundIndex(index_0, 64);
+        backgroundIndex(index_1, -64);
+        backgroundIndex(index_2, 64);
+        backgroundIndex(index_3, -64);
+
+        MinimapTarget playerTarget = TargetMinimapAPI.createTarget(
+                Component.text("\uE001"),
+                player
+        );
+
+        TargetMinimapAPI.addTarget(player, centerTarget, index_0, index_1, index_2, index_3, playerTarget);
+    }
+
+    private void backgroundIndex(MinimapTarget index, int offset) {
+        index.getComponent().offset(offset);
     }
 
     @EventHandler

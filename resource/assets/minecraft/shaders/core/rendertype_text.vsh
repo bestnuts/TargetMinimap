@@ -28,9 +28,9 @@ void main() {
     texCoord0 = UV0;
 
     isRadar = 0;
-    ivec4 ltColor = ivec4(round(texelFetch(Sampler0, ivec2(0), 0) * 255.0));
+    int ltAlpha = int(round(texelFetch(Sampler0, ivec2(0), 0).a * 255.0));
 
-    if (ltColor == ivec4(1, 2, 3, 4)) {
+    if (ltAlpha == 4) {
         float x = Color.r;
         float y = Color.g;
         float scale = Color.b * 255.0 * 2.0;
