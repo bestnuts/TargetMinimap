@@ -8,10 +8,12 @@ public class MinimapTarget {
 
     private final Target target;
     private final TargetIcon icon;
+    private final MinimapTargetComponent component;
 
     public MinimapTarget(Target target, TargetIcon icon) {
         this.target = target;
         this.icon = icon;
+        this.component = MinimapTargetComponent.create();
     }
 
     public Location getLocation() {
@@ -24,5 +26,9 @@ public class MinimapTarget {
 
     public Target getTarget() {
         return target;
+    }
+
+    public MinimapTargetComponent getComponent() {
+        return component;
     }
 }

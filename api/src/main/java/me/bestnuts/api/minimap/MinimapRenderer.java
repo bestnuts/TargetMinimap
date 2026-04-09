@@ -53,9 +53,7 @@ public class MinimapRenderer {
         double rx = -(dx * box.cosYaw + dy * box.sinYaw);
         double ry = dy * box.cosYaw - dx * box.sinYaw;
 
-        MinimapTextBuilder builder = MinimapTextBuilder
-                .create()
-                .icon(target.getIcon());
+        MinimapTextBuilder builder = target.getComponent().builder(target);
 
         if (!shape.isInBounds(rx, ry, radius)) {
             if (renderer.outAlign()) {
