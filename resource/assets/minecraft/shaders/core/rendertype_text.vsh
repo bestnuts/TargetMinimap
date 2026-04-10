@@ -20,9 +20,6 @@ out vec2 texCoord0;
 
 flat out int isRadar;
 
-const vec2 PIVOT_OFFSET = vec2(0.0, 0.0);
-const vec2 POST_OFFSET = vec2(0.0, 0.0);
-
 void main() {
     gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
 
