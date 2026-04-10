@@ -8,6 +8,8 @@ public class MinimapTargetComponent {
     private int imageWidth = 128;
     private int xOffset = 0;
     private int scaleModifier = 232;
+    private double thetaOffset = 0;
+    private Coordinate coordinate = Coordinate.Orthogonal;
 
     private MinimapTargetComponent() {
     }
@@ -31,11 +33,33 @@ public class MinimapTargetComponent {
         return this;
     }
 
+    public MinimapTargetComponent thetaOffset(double thetaOffset) {
+        this.thetaOffset = thetaOffset;
+        return this;
+    }
+
+    public MinimapTargetComponent coordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
+        return this;
+    }
+
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public int getScaleModifier() {
+        return scaleModifier;
+    }
+
+    public double getThetaOffset() {
+        return thetaOffset;
+    }
+
     public MinimapSeparatorBuilder separator() {
         return MinimapSeparatorBuilder.of(imageWidth, xOffset);
     }
 
     public MinimapTextBuilder builder(MinimapTarget target) {
-        return MinimapTextBuilder.create().icon(target.getIcon()).scale(scaleModifier);
+        return MinimapTextBuilder.create().icon(target.getIcon());
     }
 }

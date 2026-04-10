@@ -1,7 +1,5 @@
 package me.bestnuts.api.minimap.shape;
 
-import me.bestnuts.api.minimap.text.MinimapTextBuilder;
-
 public class SquareShape implements MinimapShape {
 
     @Override
@@ -10,10 +8,8 @@ public class SquareShape implements MinimapShape {
     }
 
     @Override
-    public MinimapTextBuilder outOfBoundAlign(double rx, double ry, int radius, MinimapTextBuilder builder) {
+    public double[] outOfBoundAlign(double rx, double ry, int radius) {
         double scale = radius / Math.max(Math.abs(rx), Math.abs(ry));
-        int x = Math.clamp((int) (128 * rx * scale / radius) + 128, 0, 255);
-        int y = Math.clamp((int) (128 * ry * scale / radius) + 128, 0, 255);
-        return builder.x(x).y(y);
+        return new double[]{rx * scale, ry * scale};
     }
 }

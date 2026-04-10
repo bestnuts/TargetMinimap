@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 public class MinimapRenderer {
 
-    public record CalculateBox(double cosYaw, double sinYaw) {
+    public record CalculateBox(double yaw, double cosYaw, double sinYaw) {
     }
 
     private final Minimap minimap;
@@ -26,7 +26,7 @@ public class MinimapRenderer {
         double yaw = Math.toRadians(center.getYaw());
         double cosYaw = Math.cos(yaw);
         double sinYaw = Math.sin(yaw);
-        CalculateBox box = new CalculateBox(cosYaw, sinYaw);
+        CalculateBox box = new CalculateBox(center.getYaw(), cosYaw, sinYaw);
         Iterator<MinimapTarget> iterator = minimap.getTargets().iterator();
         while (iterator.hasNext()) {
             MinimapTarget target = iterator.next();
@@ -53,20 +53,22 @@ public class MinimapRenderer {
         double rx = -(dx * box.cosYaw + dy * box.sinYaw);
         double ry = dy * box.cosYaw - dx * box.sinYaw;
 
-        MinimapTextBuilder builder = target.getComponent().builder(target);
+        MinimapTargetComponent comp = target.getComponent();
+        MinimapTextBuilder builder = comp.builder(target);
+        Coordinate coordinate = comp.getCoordinate();
+        int scale = comp.getScaleModifier();
+        double thetaOffset = comp.getThetaOffset();
 
         if (!shape.isInBounds(rx, ry, radius)) {
             if (renderer.outAlign()) {
-                return shape.outOfBoundAlign(rx, ry, radius, builder);
+                double[] aligned = shape.outOfBoundAlign(rx, ry, radius);
+                double[] resolved = coordinate.resolve(aligned[0], aligned[1], box);
+                return coordinate.apply(builder, scale, resolved[0], resolved[1], radius, box, thetaOffset);
             }
             return null;
         }
 
-        int x = (int) ((128 * rx) / radius) + 128;
-        int y = (int) ((128 * ry) / radius) + 128;
-
-        return builder
-                .x(x)
-                .y(y);
+        double[] resolved = coordinate.resolve(rx, ry, box);
+        return coordinate.apply(builder, scale, resolved[0], resolved[1], radius, box, thetaOffset);
     }
 }

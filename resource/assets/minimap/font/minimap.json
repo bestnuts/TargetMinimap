@@ -21,12 +21,12 @@
           "\uF818": 128
         }
       },
-      {"type":"bitmap","file":"minimap:background.png","ascent":32,"height":128,"chars":["\uE000"]},
-      {"type":"bitmap","file":"minimap:friendly.png","ascent":32,"height":128,"chars":["\uE001"]},
-      {"type":"bitmap","file":"minimap:enemy.png","ascent":32,"height":128,"chars":["\uE002"]},
-      {"type":"bitmap","file":"minimap:index_0.png","ascent":96,"height":128,"chars":["\uE00A"]},
-      {"type":"bitmap","file":"minimap:index_1.png","ascent":96,"height":128,"chars":["\uE00B"]},
-      {"type":"bitmap","file":"minimap:index_2.png","ascent":-32,"height":128,"chars":["\uE00C"]},
-      {"type":"bitmap","file":"minimap:index_3.png","ascent":-32,"height":128,"chars":["\uE00D"]}
+      {"type":"bitmap","file":"minimap:background.png","ascent":-52,"height":128,"chars":["\uE000"]},
+      {"type":"bitmap","file":"minimap:friendly.png","ascent":-52,"height":128,"chars":["\uE001"]},
+      {"type":"bitmap","file":"minimap:enemy.png","ascent":-52,"height":128,"chars":["\uE002"]},
+      {"type":"bitmap","file":"minimap:index_0.png","ascent":128,"height":128,"chars":["\uE00A"]},
+      {"type":"bitmap","file":"minimap:index_1.png","ascent":128,"height":128,"chars":["\uE00B"]},
+      {"type":"bitmap","file":"minimap:index_2.png","ascent":128,"height":128,"chars":["\uE00C"]},
+      {"type":"bitmap","file":"minimap:index_3.png","ascent":128,"height":128,"chars":["\uE00D"]}
     ]
   }

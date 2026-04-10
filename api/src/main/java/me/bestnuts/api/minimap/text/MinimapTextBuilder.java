@@ -9,9 +9,9 @@ import net.kyori.adventure.text.format.TextColor;
 public class MinimapTextBuilder {
 
     private String iconText = "";
-    private int x = 0;
-    private int y = 0;
-    private int scale = 232; // 셰이더 매직 넘버 232 * 2 == 464
+    private int r = 0;
+    private int g = 0;
+    private int b = 232; // 셰이더 매직 넘버 232 * 2 == 464
 
     private MinimapTextBuilder() {
     }
@@ -31,30 +31,30 @@ public class MinimapTextBuilder {
         return icon(icon.getIcon());
     }
 
-    public MinimapTextBuilder x(int x) {
-        this.x = x;
+    public MinimapTextBuilder r(int r) {
+        this.r = r;
         return this;
     }
 
-    public MinimapTextBuilder y(int y) {
-        this.y = y;
+    public MinimapTextBuilder g(int g) {
+        this.g = g;
         return this;
     }
 
-    public MinimapTextBuilder scale(int scale) {
-        this.scale = scale;
+    public MinimapTextBuilder b(int b) {
+        this.b = b;
         return this;
     }
 
     public Component build() {
         return Component.text(iconText)
-                .color(TextColor.color(x, y, scale))
+                .color(TextColor.color(r, g, b))
                 .shadowColor(ShadowColor.shadowColor(0));
     }
 
     public Component build(MinimapSeparatorBuilder separator) {
         return Component.text(separator.wrap(iconText))
-                .color(TextColor.color(x, y, scale))
+                .color(TextColor.color(r, g, b))
                 .shadowColor(ShadowColor.shadowColor(0));
     }
 }

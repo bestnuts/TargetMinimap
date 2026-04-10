@@ -15,13 +15,12 @@ out vec4 fragColor;
 
 void main() {
     vec4 color = texture(Sampler0, texCoord0) * vertexColor * ColorModulator;
-    vec4 origin = texture(Sampler0, texCoord0);
-    if (color.a < 0.1) {
-        discard;
-    }
+    if (color.a < 0.1) discard;
+
     if (isRadar == 1) {
-        color.rgb = origin.rgb;
-        color.a = 1;
+        color.rgb = texture(Sampler0, texCoord0).rgb;
+        color.a = 1.0;
     }
+
     fragColor = apply_fog(color, sphericalVertexDistance, cylindricalVertexDistance, FogEnvironmentalStart, FogEnvironmentalEnd, FogRenderDistanceStart, FogRenderDistanceEnd, FogColor);
 }
