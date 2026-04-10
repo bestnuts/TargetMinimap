@@ -14,7 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
 
 public class TestPlugin extends JavaPlugin implements Listener {
 
@@ -37,7 +36,6 @@ public class TestPlugin extends JavaPlugin implements Listener {
                 player
         );
 
-        int radius = TargetMinimap.getInstance().getConfiguration().getRenderer().radius() / 2;
         Location anchor = player.getLocation().clone();
 
         MinimapTarget index_0 = TargetMinimapAPI.createTarget(

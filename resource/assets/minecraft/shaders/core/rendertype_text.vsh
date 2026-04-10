@@ -42,8 +42,8 @@ void main() {
         gl_Position.xyz = ndcPos * gl_Position.w;
         isRadar = 1;
     } else if (ltAlpha == 5) {
-        float x = Color.r * 464.0 - 232.0;
-        float y = Color.g * 464.0 - 232.0;
+        float x = (Color.r * 464.0 - 232.0) * 0.333;
+        float y = (Color.g * 464.0 - 232.0) * 0.333;
         float theta = radians(Color.b * 360.0);
 
         float c = cos(theta);
