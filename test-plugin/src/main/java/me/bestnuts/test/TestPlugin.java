@@ -35,8 +35,9 @@ public class TestPlugin extends JavaPlugin implements Listener {
                 Component.text("\uE000"),
                 player
         );
+        centerTarget.getComponent().offset(178);
 
-        Location anchor = player.getLocation().clone();
+        Location anchor = new Location(player.getWorld(), 64, 0 ,64);
 
         MinimapTarget index_0 = TargetMinimapAPI.createTarget(
                 Component.text("\uE00A"),
@@ -59,17 +60,18 @@ public class TestPlugin extends JavaPlugin implements Listener {
                 Component.text("\uE001"),
                 player
         );
+        playerTarget.getComponent().offset(178);
 
-        backgroundIndex(index_0, -180, -90);
-        backgroundIndex(index_1, -180, 0);
-        backgroundIndex(index_2, -180, -180);
-        backgroundIndex(index_3, -180, 90);
+        backgroundIndex(index_0, -90);
+        backgroundIndex(index_1, -180);
+        backgroundIndex(index_2, 0);
+        backgroundIndex(index_3, 90);
 
         TargetMinimapAPI.addTarget(player, centerTarget, index_0, index_1, index_2, index_3, playerTarget);
     }
 
-    private void backgroundIndex(MinimapTarget index, int offset, double theta) {
-        index.getComponent().offset(offset).thetaOffset(theta).coordinate(Coordinate.Polar);
+    private void backgroundIndex(MinimapTarget index, double theta) {
+        index.getComponent().offset(-2).thetaOffset(theta).coordinate(Coordinate.Polar);
     }
 
     @EventHandler
@@ -79,6 +81,7 @@ public class TestPlugin extends JavaPlugin implements Listener {
                 Component.text("\uE002"),
                 entity
         );
+        entityTarget.getComponent().offset(178);
 
         TargetMinimap.getInstance().getScheduler().getTMPlayers().forEach(
                 player -> TargetMinimapAPI.addTarget(player.getPlayer(), entityTarget)
