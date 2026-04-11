@@ -68,6 +68,16 @@ public class TestPlugin extends JavaPlugin implements Listener {
         backgroundIndex(index_3, 90);
 
         TargetMinimapAPI.addTarget(player, centerTarget, index_0, index_1, index_2, index_3, playerTarget);
+
+        for (Entity entity : player.getWorld().getEntities()) {
+            if (entity.getUniqueId() == player.getUniqueId()) continue;
+            MinimapTarget entityTarget = TargetMinimapAPI.createTarget(
+                    Component.text("\uE002"),
+                    entity
+            );
+            entityTarget.getComponent().offset(178).alignRadius(67);
+            TargetMinimapAPI.addTarget(player, entityTarget);
+        }
     }
 
     private void backgroundIndex(MinimapTarget index, double theta) {
