@@ -10,10 +10,10 @@ public enum Coordinate {
         }
 
         @Override
-        public MinimapTextBuilder apply(MinimapTextBuilder builder, int scale, double rx, double ry, int radius, MinimapRenderer.CalculateBox box, double thetaOffset) {
+        public MinimapTextBuilder apply(MinimapTextBuilder builder, double rx, double ry, int radius, MinimapRenderer.CalculateBox box, double thetaOffset) {
             int x = (int) ((128 * rx) / radius) + 128;
             int y = (int) ((128 * ry) / radius) + 128;
-            return builder.r(x).g(y).b(scale);
+            return builder.r(x).g(y).b(232);
         }
     },
     Polar {
@@ -23,7 +23,7 @@ public enum Coordinate {
         }
 
         @Override
-        public MinimapTextBuilder apply(MinimapTextBuilder builder, int scale, double rx, double ry, int radius, MinimapRenderer.CalculateBox box, double thetaOffset) {
+        public MinimapTextBuilder apply(MinimapTextBuilder builder, double rx, double ry, int radius, MinimapRenderer.CalculateBox box, double thetaOffset) {
             int x = (int) ((128 * rx) / radius) + 128;
             int y = (int) ((128 * ry) / radius) + 128;
             double theta = ((box.yaw() + thetaOffset + 180) % 360 + 360) % 360;
@@ -33,5 +33,5 @@ public enum Coordinate {
     };
 
     public abstract double[] resolve(double rx, double ry, MinimapRenderer.CalculateBox box);
-    public abstract MinimapTextBuilder apply(MinimapTextBuilder builder, int scale, double rx, double ry, int radius, MinimapRenderer.CalculateBox box, double thetaOffset);
+    public abstract MinimapTextBuilder apply(MinimapTextBuilder builder, double rx, double ry, int radius, MinimapRenderer.CalculateBox box, double thetaOffset);
 }

@@ -81,7 +81,7 @@ public class TestPlugin extends JavaPlugin implements Listener {
                 Component.text("\uE002"),
                 entity
         );
-        entityTarget.getComponent().offset(178);
+        entityTarget.getComponent().offset(178).alignRadius(67);
 
         TargetMinimap.getInstance().getScheduler().getTMPlayers().forEach(
                 player -> TargetMinimapAPI.addTarget(player.getPlayer(), entityTarget)

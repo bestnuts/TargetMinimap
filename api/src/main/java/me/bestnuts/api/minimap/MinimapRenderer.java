@@ -56,19 +56,20 @@ public class MinimapRenderer {
         MinimapTargetComponent comp = target.getComponent();
         MinimapTextBuilder builder = comp.builder(target);
         Coordinate coordinate = comp.getCoordinate();
-        int scale = comp.getScaleModifier();
         double thetaOffset = comp.getThetaOffset();
 
-        if (!shape.isInBounds(rx, ry, radius)) {
+        int alignRadius = comp.getAlignRadius(radius);
+
+        if (!shape.isInBounds(rx, ry, alignRadius)) {
             if (renderer.outAlign()) {
-                double[] aligned = shape.outOfBoundAlign(rx, ry, radius);
+                double[] aligned = shape.outOfBoundAlign(rx, ry, alignRadius);
                 double[] resolved = coordinate.resolve(aligned[0], aligned[1], box);
-                return coordinate.apply(builder, scale, resolved[0], resolved[1], radius, box, thetaOffset);
+                return coordinate.apply(builder, resolved[0], resolved[1], radius, box, thetaOffset);
             }
             return null;
         }
 
         double[] resolved = coordinate.resolve(rx, ry, box);
-        return coordinate.apply(builder, scale, resolved[0], resolved[1], radius, box, thetaOffset);
+        return coordinate.apply(builder, resolved[0], resolved[1], radius, box, thetaOffset);
     }
 }

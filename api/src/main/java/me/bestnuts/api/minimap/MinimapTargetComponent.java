@@ -7,8 +7,8 @@ public class MinimapTargetComponent {
 
     private int imageWidth = 128;
     private int xOffset = 0;
-    private int scaleModifier = 232;
     private double thetaOffset = 0;
+    private int alignRadius = -1;
     private Coordinate coordinate = Coordinate.Orthogonal;
 
     private MinimapTargetComponent() {
@@ -28,13 +28,13 @@ public class MinimapTargetComponent {
         return this;
     }
 
-    public MinimapTargetComponent scale(int scale) {
-        this.scaleModifier = scale;
+    public MinimapTargetComponent thetaOffset(double thetaOffset) {
+        this.thetaOffset = thetaOffset;
         return this;
     }
 
-    public MinimapTargetComponent thetaOffset(double thetaOffset) {
-        this.thetaOffset = thetaOffset;
+    public MinimapTargetComponent alignRadius(int alignRadius) {
+        this.alignRadius = alignRadius;
         return this;
     }
 
@@ -43,12 +43,12 @@ public class MinimapTargetComponent {
         return this;
     }
 
-    public Coordinate getCoordinate() {
-        return coordinate;
+    public int getAlignRadius(int fallback) {
+        return alignRadius >= 0 ? alignRadius : fallback;
     }
 
-    public int getScaleModifier() {
-        return scaleModifier;
+    public Coordinate getCoordinate() {
+        return coordinate;
     }
 
     public double getThetaOffset() {
